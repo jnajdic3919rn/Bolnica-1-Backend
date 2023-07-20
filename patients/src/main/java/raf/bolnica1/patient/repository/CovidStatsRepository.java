@@ -9,6 +9,7 @@ import raf.bolnica1.patient.domain.constants.Gender;
 import raf.bolnica1.patient.domain.stats.CovidStats;
 
 import java.sql.Date;
+import java.util.List;
 import java.util.Optional;
 
 public interface CovidStatsRepository extends JpaRepository<CovidStats, Long> {
@@ -19,7 +20,7 @@ public interface CovidStatsRepository extends JpaRepository<CovidStats, Long> {
             "(:end IS NULL OR c.date <= :end) AND " +
             "(:gender IS NULL OR c.gender=:gender) AND " +
             "(:age = 0 OR c.ageCategory = :age)")
-    Page<CovidStats> findByRequests(Pageable pageable, @Param("start") Date startDate, @Param("end") Date endDate, @Param("gender") Gender gender, @Param("age") int ageCategory);
+    List<CovidStats> findByRequests(@Param("start") Date startDate, @Param("end") Date endDate, @Param("gender") Gender gender, @Param("age") int ageCategory);
 
 
 }
